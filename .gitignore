@@ -28,3 +28,6 @@ node_modules/
 
 #idea
 .idea
+
+#data postgresSQL
+data/
