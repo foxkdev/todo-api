@@ -1,14 +1,24 @@
 const awilix = require('awilix')
-const server = require('./server')
-const router = require('./router')
+const { createContainer, asClass, asFunction, asValue, InjectionMode } = awilix
+const config = require('./infra/config')
+const getTasks = require('./application/get_tasks')
+const db = require('./infra/persistence/pg')
+const repositories = require('./infra/repository')
 
-const { createContainer, asClass, asFunction } = awilix
-
-const container = createContainer()
-
-container.register({
-    server: asClass(server).singleton(),
-    router: asClass(router).singleton()
+const container = createContainer({
+    injectionMode: InjectionMode.PROXY,
 })
-
+//global
+container.register({
+    config: asValue(config)
+})
+// repositories
+container.register({
+    db: asFunction(db).singleton(),
+    repositories: asFunction(repositories).singleton()
+})
+//applications
+container.register({
+    getTasks: asClass(getTasks)
+})
 module.exports = container

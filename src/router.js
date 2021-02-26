@@ -1,17 +1,11 @@
 
 const express = require('express')
+const taskController = require('./infra/controllers/task-controller')
 
-class Router {
-    constructor() {
-        this.router = express.Router()
+const router = express.Router()
+router.use('/tasks', taskController)
 
-        this.router.get('/test', (req, res, next) => {
-            res.json({message: 'test'})
-        })
-        this.router.get('*', (req, res) => {
-            res.status(404).json({error: 'path does not exist'})
-        })
-        return this.router
-    }
-}
-module.exports = Router
+router.get('*', (req, res) => {
+    res.status(404).json({error: 'path does not exist'})
+})
+module.exports = router

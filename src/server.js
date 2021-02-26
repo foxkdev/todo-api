@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-
+const router = require('./router')
 class Server {
-    constructor({ router }) {
+    constructor() {
         this.app = express()
         this.app.use(cors())
         this.app.use(morgan(':method :url :status :response-time ms'))
