@@ -6,6 +6,8 @@ class Server {
     constructor() {
         this.app = express()
         this.app.use(cors())
+        this.app.use(express.json()) // for parsing application/json
+        this.app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
         this.app.use(morgan(':method :url :status :response-time ms'))
 
         this.app.use(router)

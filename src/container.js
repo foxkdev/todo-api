@@ -3,6 +3,7 @@ const { createContainer, asClass, asFunction, asValue, InjectionMode } = awilix
 const config = require('./infra/config')
 const getTasks = require('./application/get_tasks')
 const getTask = require('./application/get_task')
+const createTask = require('./application/create_task')
 const db = require('./infra/persistence/pg')
 // const repositories = require('./infra/repository')
 const taskRepository = require('./infra/repository/task-repository')
@@ -23,6 +24,7 @@ container.register({
 //applications
 container.register({
     getTasks: asClass(getTasks),
-    getTask: asClass(getTask)
+    getTask: asClass(getTask),
+    createTask: asClass(createTask),
 })
 module.exports = container

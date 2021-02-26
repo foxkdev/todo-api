@@ -13,9 +13,13 @@ class TaskRepository {
         const task = await this.db.Task.findByPk(id)
         return this.toDomain(task)
     }
+    async create(domain) {
+        const task = await this.db.Task.create(domain)
+        return this.toDomain(task)
+    }
     toDomain(document) {
-        const { id, title, description, status } = document
-        const task = Task.build({id, title, description, status})
+        const { id, title, description, status, createdAt, updatedAt } = document
+        const task = Task.build({id, title, description, status, createdAt, updatedAt})
         return task
     }
 }

@@ -5,8 +5,8 @@ class GetTask {
     }
     async getTask(commandBuilder) {
         const {taskId} = commandBuilder
-        const {id, title, description, status } = await this.taskRepository.findById(taskId)
-        return getTaskResponseBuilder({id, title, description, status})
+        const task = await this.taskRepository.findById(taskId)
+        return getTaskResponseBuilder({task})
     }
 }
 module.exports = GetTask
