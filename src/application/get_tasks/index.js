@@ -1,9 +1,11 @@
 
 class GetTasks {
-    constructor() {
+    constructor({taskRepository}) {
+        this.taskRepository = taskRepository
     }
     async getTasks(){
-        return []
+        const tasks = await this.taskRepository.findAll()
+        return tasks
     }
 }
 module.exports = GetTasks

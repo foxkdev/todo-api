@@ -1,14 +1,14 @@
-const Sequelize = require('sequelize')
+const {Sequelize, DataTypes} = require('sequelize')
 const fs = require('fs')
 
 module.exports = ({config: { sequelize: {uri: sequelizeUri}}}) => {
     const sequelize = new Sequelize(sequelizeUri)
 
     let models = {}
-    fs.readdirSync('./models').forEach((file) => {
+    fs.readdirSync(__dirname + '/models').forEach((file) => {
         if(file === 'index.js') return
-        const factory = require(`../models/${file}`)
-        const model = factory(sequelize, Sequelize)
+        const factory = require(`./models/${file}`)
+        const model = factory({sequelize, DataTypes})
         models[model.name] = model
     })
     Object.keys(models).forEach((key) => {

@@ -1,8 +1,13 @@
 const env = process.env.NODE_ENV
 
+let dbURI = process.env.DB_URI
+if(!dbURI) {
+    dbURI = `${process.env.DB_DIALECT}://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/${process.env.DB_DATABASE}`
+}
+
 const run = {
     sequelize: {
-        uri: process.env.DB_URI
+        uri: dbURI
     }
 }
 

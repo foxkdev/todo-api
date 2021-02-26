@@ -3,7 +3,8 @@ const { createContainer, asClass, asFunction, asValue, InjectionMode } = awilix
 const config = require('./infra/config')
 const getTasks = require('./application/get_tasks')
 const db = require('./infra/persistence/pg')
-const repositories = require('./infra/repository')
+// const repositories = require('./infra/repository')
+const taskRepository = require('./infra/repository/task-repository')
 
 const container = createContainer({
     injectionMode: InjectionMode.PROXY,
@@ -15,7 +16,8 @@ container.register({
 // repositories
 container.register({
     db: asFunction(db).singleton(),
-    repositories: asFunction(repositories).singleton()
+    taskRepository: asClass(taskRepository)
+    // repositories: asFunction(repositories).singleton()
 })
 //applications
 container.register({
